@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Syncopate&display=swap');
+
+.scene-container{  
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  position: relative;
+  font-family: 'Syncopate', sans-serif;
+}
+
+.title {
+  color: #1D04BF;
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  text-transform: uppercase;  
+  font-size: 4rem;
+  letter-spacing: 1rem;
+}

@@ -1,0 +1,27 @@
+.anim-text-parent {
+  position: absolute;
+  bottom: 2rem;
+  left: 1.2rem;
+  display: inline-block;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.anim-text {
+  display: block;
+  position: absolute;
+  opacity: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  clip: rect(0px, 0px, 900px, 0px);
+}
+
+.v-bar {
+  display: block;
+  position: absolute;
+  right: -15px;
+  top: 0;
+  width: 0;
+  height: 100%;
+  /* background-color: #000; */
+}

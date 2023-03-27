@@ -1,0 +1,17 @@
+.container {
+  position: absolute;
+  bottom: 3rem;
+  left: 1rem;
+  text-align: center;
+}
+
+.copy {
+  font-size: 0;
+}
+
+.copy span {
+  display: inline-block;
+  font-size: 5rem;
+  color: #3726E3;
+  font-weight: bolder;
+}
