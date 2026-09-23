@@ -1,0 +1,63 @@
+{
+  "nav": {
+    "works": "Works",
+    "about": "About",
+    "instagram": "Instagram",
+    "email": "Email",
+    "language": "Language",
+    "skip": "Skip to content",
+    "main": "Main"
+  },
+  "home": {
+    "statement": "Digital installations, visual performances and real-time generative visuals.",
+    "selected": "Projects"
+  },
+  "works": {
+    "title": "Works",
+    "categories": {
+      "instalaciones": "Installations",
+      "performances": "Audiovisual performances",
+      "visuales": "Live visuals",
+      "marcas": "Brands"
+    }
+  },
+  "project": {
+    "year": "Date",
+    "place": "Place",
+    "type": "Type of piece",
+    "client": "Client",
+    "next": "Next project",
+    "image": "image",
+    "video": "video"
+  },
+  "about": {
+    "title": "About",
+    "bio": "Estefany Velázquez, also known as Rampa, is a Mexican digital artist focused on creating digital installations, visual performances and real-time generative visuals. Her visual style explores parametric worlds built from sinuous volumes in constant transformation, flowing into organic textures and metallic gradients that merge into digital chiaroscuros full of detail.",
+    "contact": "Contact",
+    "city": "Mexico City",
+    "imageAlt": "Generative visual by RAMPA"
+  },
+  "form": {
+    "title": "Write",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send",
+    "sending": "Sending",
+    "success": "Message sent. I will reply soon.",
+    "error": "The message was not sent. Try again or write directly to {email}.",
+    "invalid": "Check the marked fields.",
+    "tooMany": "Too many attempts. Wait a few minutes."
+  },
+  "footer": {
+    "instagram": "Instagram"
+  },
+  "notFound": {
+    "title": "Page not found.",
+    "back": "Back to home"
+  },
+  "meta": {
+    "description": "Estefany Velázquez, Mexican digital artist. Digital installations, visual performances and real-time generative visuals.",
+    "worksDescription": "Index of works by Estefany Velázquez (RAMPA): {projects}."
+  }
+}

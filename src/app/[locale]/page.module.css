@@ -1,0 +1,30 @@
+/* Hero: pantalla completa, solo el shader, el nombre y una línea. */
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 10px;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: var(--header-height) var(--margin) 48px;
+}
+
+.name {
+  font-size: 0.86rem;
+  letter-spacing: 0.14em;
+  color: var(--secondary);
+}
+
+.statement {
+  max-width: 26em;
+  font-size: clamp(1.25rem, 2vw, 1.85rem);
+  line-height: 1.3;
+  letter-spacing: -0.005em;
+  text-wrap: balance;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding-bottom: 36px;
+  }
+}

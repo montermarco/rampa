@@ -1,0 +1,455 @@
+{
+  "about/01": {
+    "width": 1920,
+    "height": 1080,
+    "widths": [
+      640,
+      1080,
+      1600,
+      1920
+    ],
+    "color": "#080808"
+  },
+  "about/02": {
+    "width": 1920,
+    "height": 1080,
+    "widths": [
+      640,
+      1080,
+      1600,
+      1920
+    ],
+    "color": "#080808"
+  },
+  "adidas/01-poster": {
+    "width": 1080,
+    "height": 1920,
+    "widths": [
+      640,
+      1080
+    ],
+    "color": "#3808b8"
+  },
+  "adidas/02": {
+    "width": 960,
+    "height": 1280,
+    "widths": [
+      640,
+      960
+    ],
+    "color": "#080808"
+  },
+  "adidas/03": {
+    "width": 960,
+    "height": 1280,
+    "widths": [
+      640,
+      960
+    ],
+    "color": "#080808"
+  },
+  "adidas/04": {
+    "width": 960,
+    "height": 1280,
+    "widths": [
+      640,
+      960
+    ],
+    "color": "#080808"
+  },
+  "adidas/05-poster": {
+    "width": 1080,
+    "height": 1920,
+    "widths": [
+      640,
+      1080
+    ],
+    "color": "#b8b8b8"
+  },
+  "ccd/01": {
+    "width": 2048,
+    "height": 1536,
+    "widths": [
+      640,
+      1080,
+      1600,
+      2048
+    ],
+    "color": "#080818"
+  },
+  "ccd/02": {
+    "width": 1920,
+    "height": 1080,
+    "widths": [
+      640,
+      1080,
+      1600,
+      1920
+    ],
+    "color": "#080818"
+  },
+  "ccd/03": {
+    "width": 1920,
+    "height": 1080,
+    "widths": [
+      640,
+      1080,
+      1600,
+      1920
+    ],
+    "color": "#080808"
+  },
+  "ccd/04": {
+    "width": 1920,
+    "height": 1080,
+    "widths": [
+      640,
+      1080,
+      1600,
+      1920
+    ],
+    "color": "#080808"
+  },
+  "ccd/05": {
+    "width": 2003,
+    "height": 1283,
+    "widths": [
+      640,
+      1080,
+      1600,
+      2003
+    ],
+    "color": "#080838"
+  },
+  "kick-off-zona-maco/01-poster": {
+    "width": 1920,
+    "height": 1080,
+    "widths": [
+      640,
+      1080,
+      1600,
+      1920
+    ],
+    "color": "#080808"
+  },
+  "kick-off-zona-maco/02": {
+    "width": 1814,
+    "height": 2560,
+    "widths": [
+      640,
+      1080,
+      1600,
+      1814
+    ],
+    "color": "#080808"
+  },
+  "kick-off-zona-maco/03": {
+    "width": 1920,
+    "height": 2560,
+    "widths": [
+      640,
+      1080,
+      1600,
+      1920
+    ],
+    "color": "#080808"
+  },
+  "kick-off-zona-maco/04": {
+    "width": 1920,
+    "height": 2560,
+    "widths": [
+      640,
+      1080,
+      1600,
+      1920
+    ],
+    "color": "#080808"
+  },
+  "kick-off-zona-maco/05": {
+    "width": 1920,
+    "height": 2560,
+    "widths": [
+      640,
+      1080,
+      1600,
+      1920
+    ],
+    "color": "#080808"
+  },
+  "kick-off-zona-maco/06": {
+    "width": 1920,
+    "height": 2560,
+    "widths": [
+      640,
+      1080,
+      1600,
+      1920
+    ],
+    "color": "#080808"
+  },
+  "kick-off-zona-maco/07": {
+    "width": 1920,
+    "height": 2560,
+    "widths": [
+      640,
+      1080,
+      1600,
+      1920
+    ],
+    "color": "#080808"
+  },
+  "kick-off-zona-maco/08": {
+    "width": 1920,
+    "height": 2560,
+    "widths": [
+      640,
+      1080,
+      1600,
+      1920
+    ],
+    "color": "#080808"
+  },
+  "kick-off-zona-maco/09": {
+    "width": 1920,
+    "height": 2560,
+    "widths": [
+      640,
+      1080,
+      1600,
+      1920
+    ],
+    "color": "#080808"
+  },
+  "mutek-mx/01": {
+    "width": 1842,
+    "height": 1704,
+    "widths": [
+      640,
+      1080,
+      1600,
+      1842
+    ],
+    "color": "#080838"
+  },
+  "mutek-mx/02": {
+    "width": 1440,
+    "height": 1440,
+    "widths": [
+      640,
+      1080,
+      1440
+    ],
+    "color": "#080808"
+  },
+  "mutek-mx/03": {
+    "width": 2500,
+    "height": 2500,
+    "widths": [
+      640,
+      1080,
+      1600,
+      2400
+    ],
+    "color": "#080808"
+  },
+  "mutek-mx/04": {
+    "width": 1536,
+    "height": 2048,
+    "widths": [
+      640,
+      1080,
+      1536
+    ],
+    "color": "#1808e8"
+  },
+  "mutek-mx/05": {
+    "width": 1536,
+    "height": 2048,
+    "widths": [
+      640,
+      1080,
+      1536
+    ],
+    "color": "#484868"
+  },
+  "mutek-mx/06": {
+    "width": 1440,
+    "height": 1440,
+    "widths": [
+      640,
+      1080,
+      1440
+    ],
+    "color": "#080828"
+  },
+  "mutek-mx/07": {
+    "width": 1440,
+    "height": 1439,
+    "widths": [
+      640,
+      1080,
+      1440
+    ],
+    "color": "#080808"
+  },
+  "nike/01-poster": {
+    "width": 1080,
+    "height": 1920,
+    "widths": [
+      640,
+      1080
+    ],
+    "color": "#080808"
+  },
+  "nike/02": {
+    "width": 2048,
+    "height": 1536,
+    "widths": [
+      640,
+      1080,
+      1600,
+      2048
+    ],
+    "color": "#481848"
+  },
+  "nike/03": {
+    "width": 1440,
+    "height": 1728,
+    "widths": [
+      640,
+      1080,
+      1440
+    ],
+    "color": "#280818"
+  },
+  "nike/04": {
+    "width": 1440,
+    "height": 1723,
+    "widths": [
+      640,
+      1080,
+      1440
+    ],
+    "color": "#080828"
+  },
+  "nike/05": {
+    "width": 1676,
+    "height": 842,
+    "widths": [
+      640,
+      1080,
+      1600,
+      1676
+    ],
+    "color": "#080808"
+  },
+  "nike/06": {
+    "width": 1920,
+    "height": 2560,
+    "widths": [
+      640,
+      1080,
+      1600,
+      1920
+    ],
+    "color": "#080808"
+  },
+  "nike/07": {
+    "width": 1572,
+    "height": 826,
+    "widths": [
+      640,
+      1080,
+      1572
+    ],
+    "color": "#080808"
+  },
+  "nike/08": {
+    "width": 812,
+    "height": 1011,
+    "widths": [
+      640,
+      812
+    ],
+    "color": "#080808"
+  },
+  "nike/09-poster": {
+    "width": 1920,
+    "height": 1080,
+    "widths": [
+      640,
+      1080,
+      1600,
+      1920
+    ],
+    "color": "#280838"
+  },
+  "takeda/01": {
+    "width": 2048,
+    "height": 1536,
+    "widths": [
+      640,
+      1080,
+      1600,
+      2048
+    ],
+    "color": "#080808"
+  },
+  "takeda/02": {
+    "width": 1047,
+    "height": 836,
+    "widths": [
+      640,
+      1047
+    ],
+    "color": "#080808"
+  },
+  "takeda/03": {
+    "width": 1536,
+    "height": 2048,
+    "widths": [
+      640,
+      1080,
+      1536
+    ],
+    "color": "#b8b8a8"
+  },
+  "takeda/04": {
+    "width": 1080,
+    "height": 1080,
+    "widths": [
+      640,
+      1080
+    ],
+    "color": "#080808"
+  },
+  "takeda/05": {
+    "width": 1055,
+    "height": 1012,
+    "widths": [
+      640,
+      1055
+    ],
+    "color": "#080808"
+  },
+  "takeda/06": {
+    "width": 2048,
+    "height": 1536,
+    "widths": [
+      640,
+      1080,
+      1600,
+      2048
+    ],
+    "color": "#a8a898"
+  },
+  "takeda/07": {
+    "width": 1018,
+    "height": 1008,
+    "widths": [
+      640,
+      1018
+    ],
+    "color": "#080808"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "nav": {
+    "works": "Trabajos",
+    "about": "Acerca de",
+    "instagram": "Instagram",
+    "email": "Correo",
+    "language": "Idioma",
+    "skip": "Saltar al contenido",
+    "main": "Principal"
+  },
+  "home": {
+    "statement": "Instalaciones digitales, performances visuales y visuales generativos en tiempo real.",
+    "selected": "Proyectos"
+  },
+  "works": {
+    "title": "Trabajos",
+    "categories": {
+      "instalaciones": "Instalaciones",
+      "performances": "Performances audiovisuales",
+      "visuales": "Visuales en vivo",
+      "marcas": "Marcas"
+    }
+  },
+  "project": {
+    "year": "Fecha",
+    "place": "Lugar",
+    "type": "Tipo de pieza",
+    "client": "Cliente",
+    "next": "Siguiente proyecto",
+    "image": "imagen",
+    "video": "video"
+  },
+  "about": {
+    "title": "Acerca de",
+    "bio": "Estefany Velázquez, también conocida como Rampa, es una artista digital mexicana enfocada en la creación de instalaciones digitales, performances visuales y visuales generativos en tiempo real. Su estilo visual explora mundos paramétricos creados con volumetrías sinuosas en constante transformación, desembocando en texturas orgánicas y gradientes metálicos que se funden en claroscuros digitales llenos de detalles.",
+    "contact": "Contacto",
+    "city": "Ciudad de México",
+    "imageAlt": "Visual generativo de RAMPA"
+  },
+  "form": {
+    "title": "Escribir",
+    "name": "Nombre",
+    "email": "Correo",
+    "message": "Mensaje",
+    "send": "Enviar",
+    "sending": "Enviando",
+    "success": "Mensaje enviado. Responderé pronto.",
+    "error": "El mensaje no se envió. Intenta de nuevo o escribe directamente a {email}.",
+    "invalid": "Revisa los campos marcados.",
+    "tooMany": "Demasiados intentos. Espera unos minutos."
+  },
+  "footer": {
+    "instagram": "Instagram"
+  },
+  "notFound": {
+    "title": "Página no encontrada.",
+    "back": "Volver al inicio"
+  },
+  "meta": {
+    "description": "Estefany Velázquez, artista digital mexicana. Instalaciones digitales, performances visuales y visuales generativos en tiempo real.",
+    "worksDescription": "Índice de trabajos de Estefany Velázquez (RAMPA): {projects}."
+  }
+}

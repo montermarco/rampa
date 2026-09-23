@@ -1,0 +1,77 @@
+.header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  height: var(--header-height);
+  padding-inline: var(--margin);
+  font-size: 0.86rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  /* Sin barra de fondo: el shader y las piezas pasan por debajo. */
+  pointer-events: none;
+}
+
+.header a {
+  pointer-events: auto;
+  transition: color 200ms ease;
+}
+
+.header a:hover,
+.header a[aria-current] {
+  color: var(--secondary);
+}
+
+.nav {
+  display: flex;
+  gap: 32px;
+}
+
+.brand {
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+}
+
+.right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 22px;
+}
+
+.icon {
+  display: inline-flex;
+  padding: 4px;
+  margin: -4px;
+}
+
+.lang {
+  display: flex;
+  align-items: center;
+}
+
+.slash {
+  margin-inline: 6px;
+  color: var(--secondary);
+}
+
+@media (max-width: 768px) {
+  .header {
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+  }
+
+  .nav {
+    gap: 16px;
+  }
+
+  .right {
+    gap: 14px;
+  }
+
+  .brand {
+    font-size: 1rem;
+  }
+}

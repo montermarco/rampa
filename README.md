@@ -1,36 +1,113 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# RAMPA
 
-## Getting Started
+Portafolio de Estefany Velázquez (RAMPA). Next.js (App Router), GSAP + ScrollTrigger, Lenis,
+CSS Modules y next-intl (español por defecto en `/es`, inglés en `/en`). Sin CMS: el contenido
+vive en archivos del repositorio. Se publica en Vercel.
 
-First, run the development server:
+## Desarrollo
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000 (redirige a /es)
+npm run build    # compila; también regenera las variantes de imagen
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Requiere Node 20.19 o superior.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Variables de entorno
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Copia `.env.example` a `.env.local` en local; en Vercel se cargan en **Settings → Environment
+Variables**.
 
-## Learn More
+| Variable | Para qué |
+| --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | URL pública con el dominio final (`https://rampa.mx`). Se usa en Open Graph, canonical, hreflang y sitemap. |
+| `RESEND_API_KEY` | Clave de [Resend](https://resend.com) para el formulario de contacto. |
+| `RESEND_TO` | Correo que recibe los mensajes del formulario. |
+| `RESEND_FROM` | Opcional. Remitente con dominio verificado en Resend, p. ej. `RAMPA <hola@rampa.mx>`. |
 
-To learn more about Next.js, take a look at the following resources:
+Sin `RESEND_API_KEY` y `RESEND_TO`, la página Acerca de no muestra el formulario: solo el correo
+con enlace. **Mientras no haya dominio**, Resend permite enviar desde `onboarding@resend.dev`, pero
+únicamente al correo con el que se creó la cuenta de Resend. Basta con crear la cuenta con
+velazquezfany@gmail.com y poner ese mismo correo en `RESEND_TO`. Cuando exista el dominio, se
+verifica en Resend y se define `RESEND_FROM`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Publicar en Vercel
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Sube el repositorio a GitHub.
+2. En [vercel.com/new](https://vercel.com/new) importa el repositorio. Vercel detecta Next.js;
+   no hay que cambiar ninguna opción. Cada `git push` a `main` publica una versión nueva.
+3. Agrega las variables de entorno de arriba.
 
-## Deploy on Vercel
+### Conectar el dominio
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. En Vercel: proyecto → **Settings → Domains → Add**, y escribe el dominio (p. ej. `rampa.mx`).
+2. Vercel muestra los registros DNS a crear con el proveedor del dominio. Normalmente:
+   - dominio raíz: registro **A** apuntando a la IP que indica Vercel;
+   - `www`: registro **CNAME** apuntando al valor que indica Vercel.
+3. Define `NEXT_PUBLIC_SITE_URL` con el dominio final y vuelve a desplegar.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Agregar un proyecto
+
+1. **Medios.** Crea la carpeta `media/<slug>/` y pon ahí las imágenes originales (JPG o PNG,
+   idealmente de 2400 px o más en su lado largo), numeradas: `01.jpg`, `02.jpg`…
+2. **Datos.** En `src/data/projects.ts` agrega un objeto a la lista `projects`, en la posición
+   donde deba aparecer:
+
+   ```ts
+   {
+     slug: "nombre-del-proyecto",        // define la URL: /es/trabajos/nombre-del-proyecto
+     title: "Nombre del proyecto",
+     categories: ["instalaciones"],      // instalaciones | performances | visuales | marcas
+     year: "2026",
+     place: { es: "Ciudad de México", en: "Mexico City" },
+     type: { es: "Instalación interactiva", en: "Interactive installation" },
+     client: "",                          // los campos vacíos no se muestran
+     description: { es: ["Un párrafo."], en: ["One paragraph."] },
+     ratio: "4:3",                        // proporción de la portada en el inicio: 4:3, 16:10, 3:4 o 1:1
+     cover: image("nombre-del-proyecto/01"),   // ruta dentro de media/, sin extensión
+     media: [
+       image("nombre-del-proyecto/02"),
+       image("nombre-del-proyecto/03", "Pie de foto opcional"),
+     ],
+   },
+   ```
+
+   `hero` es opcional: si se omite, la imagen principal de la página es `cover`. Un proyecto
+   puede llevar varias categorías y aparece en cada una del índice.
+3. **Genera las variantes** (AVIF y WebP en varios tamaños) con `npm run images`. También corre
+   solo antes de cada `npm run build`. Haz commit de `media/`, `public/media/` y
+   `src/data/media-manifest.json`.
+
+### Reemplazar imágenes por los archivos finales
+
+Sustituye el archivo en `media/<slug>/NN.jpg` conservando el nombre, corre `npm run images`
+(solo regenera lo que cambió) y haz commit. Si el nombre cambia, actualiza la ruta en
+`projects.ts`.
+
+### Video
+
+Exporta un MP4 H.264 sin audio (unos 1280 px en el lado largo) y guárdalo en
+`public/media/<slug>/05.mp4`. Su póster va en `media/<slug>/05-poster.jpg`. En `projects.ts` se
+declara con `video("<slug>/05")`. Se reproduce silenciado y en loop, y solo se descarga al
+acercarse a la pantalla.
+
+## Dónde está cada cosa
+
+| Qué | Dónde |
+| --- | --- |
+| Proyectos | `src/data/projects.ts` |
+| Contacto y datos generales | `src/data/site.ts` |
+| Textos de la interfaz y bio (es/en) | `messages/es.json`, `messages/en.json` |
+| Rutas traducidas (`/trabajos` ↔ `/works`) | `src/i18n/routing.ts` |
+| Shader del hero | `src/components/LineField.tsx` (referencia: `reference/hero-shader.html`) |
+| Secuencia de proyectos del inicio | `src/components/ProjectSequence.tsx` |
+| Índice con vista previa al pasar el cursor | `src/components/WorksIndex.tsx` |
+| Formulario y envío | `src/components/ContactForm.tsx`, `src/app/api/contact/route.ts` |
+| Scroll suave (Lenis) y transición entre páginas | `src/components/AppShell.tsx` |
+| Imágenes y video | `src/components/Media.tsx`, `scripts/optimize-images.mjs` |
+| Colores, tipografía y márgenes | `src/app/globals.css` |
+
+Con la opción del sistema «reducir movimiento» activada, el sitio se muestra estático: el shader
+dibuja un solo cuadro, no hay Lenis ni animaciones de scroll ni fundidos, y el video no se
+reproduce solo.

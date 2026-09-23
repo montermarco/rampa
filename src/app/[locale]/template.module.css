@@ -1,0 +1,23 @@
+.page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Solo tras una navegación interna (AppShell marca <html data-navigated>). En la
+   carga inicial el contenido se pinta de inmediato: un fundido ahí retrasaría el LCP. */
+:global(html[data-navigated]) .page {
+  animation: enter 380ms ease both;
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :global(html[data-navigated]) .page {
+    animation: none;
+  }
+}
