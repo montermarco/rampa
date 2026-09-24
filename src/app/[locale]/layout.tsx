@@ -15,7 +15,7 @@ export const generateStaticParams = () => routing.locales.map((locale) => ({ loc
 export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "meta" });
-  const title = `${site.name} — ${site.artist}`;
+  const title = site.name;
   const page = pageMetadata({ locale: locale as Locale, href: "/", title, description: t("description") });
   return {
     metadataBase: new URL(siteUrl),
@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
       type: "website",
       siteName: site.name,
       // Imagen al compartir: por ahora la de Acerca de.
-      images: [{ url: fallbackUrl(site.aboutImage), alt: `${site.name} — ${site.artist}` }],
+      images: [{ url: fallbackUrl(site.aboutImage), alt: site.name }],
     },
     twitter: { card: "summary_large_image" },
   };
@@ -50,8 +50,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
       {
         "@type": "Person",
         "@id": `${siteUrl}/#artist`,
-        name: site.artist,
-        alternateName: site.name,
+        name: site.name,
         description: tm("description"),
         email: site.email,
         url: siteUrl,

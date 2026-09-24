@@ -8,7 +8,6 @@ export default function Footer() {
     <footer className={styles.footer}>
       <p className={styles.statement}>{t("statement")}</p>
       <div className={`${styles.contact} label`}>
-        <span>{site.artist}</span>
         <a href={`mailto:${site.email}`}>{site.email}</a>
         <a href={site.instagram} target="_blank" rel="noopener noreferrer">
           Instagram
