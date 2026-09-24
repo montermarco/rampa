@@ -26,6 +26,8 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
       ...page.openGraph,
       type: "website",
       siteName: site.name,
+      title: site.name,
+      description: "Artista Digital",
       // Imagen al compartir: por ahora la de Acerca de.
       images: [{ url: fallbackUrl(site.aboutImage), alt: site.name }],
     },
