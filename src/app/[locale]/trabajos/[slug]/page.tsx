@@ -63,6 +63,7 @@ export default async function ProjectPage({ params }: Props) {
   const project = getProject(slug);
   if (!project) notFound();
   const t = await getTranslations("project");
+  const tn = await getTranslations("nav");
   const lang = locale as Locale;
 
   const hero = project.hero ?? project.cover;
@@ -80,8 +81,13 @@ export default async function ProjectPage({ params }: Props) {
 
   return (
     <article>
+      <TransitionLink href="/trabajos" className={styles.back} aria-label={tn("back")}>
+        ←
+      </TransitionLink>
+      <Media item={hero} alt={project.title} sizes="100vw" priority fill className={styles.hero} />
+
       <header className={styles.header}>
-        <h1 className={`${styles.title} mono`}>{project.title}</h1>
+        <h1 className={styles.title}>{project.title}</h1>
         {facts.length > 0 && (
           <dl className={`${styles.facts} mono`}>
             {facts.map(([label, value]) => (
@@ -93,8 +99,6 @@ export default async function ProjectPage({ params }: Props) {
           </dl>
         )}
       </header>
-
-      <Media item={hero} alt={project.title} sizes="100vw" priority fill className={styles.hero} />
 
       {description.length > 0 && (
         <div className={styles.description}>

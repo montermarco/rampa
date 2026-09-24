@@ -1,0 +1,40 @@
+/* Pantalla completa: solo el shader y el RAMPA de vidrio, que dibuja el canvas. */
+.hero {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: var(--header-height) var(--margin) 0;
+}
+
+/* Ancla del vidrio: invisible (color transparente) pero con la fuente cargada y el
+   tamaño real; LineField lee su rectángulo y su tipografía. */
+.glass {
+  font-family: var(--font-display), "Helvetica Neue", Arial, sans-serif;
+  font-weight: 600;
+  font-size: clamp(4.5rem, 17.5vw, 20.5rem);
+  line-height: 1;
+  letter-spacing: 0.08em;
+  color: transparent;
+  user-select: none;
+  white-space: nowrap;
+}
+
+/* El statement en su propia pantalla. */
+.statementSection {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: var(--header-height) var(--margin) 0;
+  text-align: center;
+}
+
+.statement {
+  max-width: 18em;
+  color: #5c5c5c;
+  font-size: clamp(1.9rem, 4.2vw, 4.2rem);
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}

@@ -1,45 +1,59 @@
+/* Texto en la columna de lectura (mismo ancho que en proyecto), foto a la derecha. */
 .page {
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-columns: 34rem minmax(0, 1fr);
+  /* La foto abarca las dos filas; el alto sobrante va a la segunda, no al título. */
+  grid-template-rows: auto 1fr;
   column-gap: 24px;
-  padding: calc(var(--header-height) + 14vh) var(--margin) 0;
+  padding: 96px var(--margin) 0;
 }
 
+/* Título igual que "Trabajos": mismo tamaño y misma altura. */
 .heading {
-  grid-column: 1 / span 2;
-  padding-top: 6px;
-  font-size: 0.86rem;
-  letter-spacing: 0.14em;
-  color: var(--secondary);
+  grid-column: 1;
+  margin-top: 8px;
+  margin-bottom: 48px;
+  font-size: 1.6rem;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  font-weight: 400;
+  color: var(--text);
 }
 
 .text {
-  grid-column: 3 / span 6;
+  grid-column: 1;
   display: flex;
   flex-direction: column;
-  gap: 64px;
+  gap: 32px;
 }
 
 .bio {
-  max-width: 46ch;
-  font-size: clamp(1.15rem, 1.5vw, 1.5rem);
-  line-height: 1.45;
+  font-size: 1.15rem;
+  line-height: 1.5;
 }
 
-.contact {
-  display: grid;
-  gap: 10px;
-  font-size: 0.92rem;
+/* Ficha de contacto, igual que la cédula de los proyectos. */
+.facts {
+  border-top: 1px solid var(--line);
+  font-size: 0.86rem;
   letter-spacing: 0.04em;
 }
 
-.contact h2 {
+.facts > div {
+  display: grid;
+  grid-template-columns: 12em 1fr;
+  gap: 24px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.facts dt {
   color: var(--secondary);
 }
 
-.contact ul {
-  display: grid;
-  gap: 4px;
+/* El correo y la URL van tal cual, sin mayúsculas. */
+.facts dd {
+  text-transform: none;
 }
 
 .contact a {
@@ -50,26 +64,37 @@
   color: var(--secondary);
 }
 
+/* Foto a la derecha, pegada al margen y alineada arriba con el título. */
 .image {
-  grid-column: 10 / -1;
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  justify-self: end;
+  align-self: start;
+  width: 34%;
+  margin-top: 8px;
   aspect-ratio: 3 / 4;
   height: auto;
-  align-self: start;
 }
 
 @media (max-width: 768px) {
   .page {
     display: flex;
     flex-direction: column;
-    gap: 40px;
-    padding-top: calc(var(--header-height) + 10vh);
+    padding-top: 56px;
   }
 
-  .text {
-    gap: 48px;
+  .heading {
+    margin-bottom: 32px;
+  }
+
+  .facts > div {
+    grid-template-columns: 1fr;
+    gap: 2px;
   }
 
   .image {
+    width: 100%;
+    margin-top: 40px;
     aspect-ratio: 4 / 5;
   }
 }

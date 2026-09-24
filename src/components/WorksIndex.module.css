@@ -1,36 +1,45 @@
 .page {
-  padding: calc(var(--header-height) + 14vh) var(--margin) 0;
+  padding: 40px var(--margin) 0;
 }
 
+/* Flecha de regreso al inicio, encima del título. Mide 24 px + 40 px de aire (el
+   margen de 8 px del título se funde con este), con lo que el título queda a la misma
+   altura que antes (96 + 8). */
+.back {
+  display: block;
+  width: max-content;
+  height: 24px;
+  margin-bottom: 40px;
+  font-size: 1.6rem;
+  line-height: 24px;
+}
+
+.back:hover {
+  color: var(--secondary);
+}
+
+/* Título de la página: negro y del tamaño de los nombres de proyecto, para que se
+   distinga de las etiquetas grises de categoría. */
 .heading {
-  margin-bottom: 8vh;
-  font-size: 0.86rem;
-  letter-spacing: 0.14em;
-  color: var(--secondary);
+  margin-top: 8px;
+  margin-bottom: 48px;
+  font-size: 1.6rem;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  font-weight: 400;
+  color: var(--text);
 }
 
-.group {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: 24px;
-  margin-bottom: 9vh;
-}
-
-.category {
-  grid-column: 1 / span 3;
-  padding-top: 18px;
-  font-size: 0.86rem;
-  letter-spacing: 0.06em;
-  color: var(--secondary);
+/* Tabla: una sola lista. El fondo ocupa exactamente su rectángulo. */
+.board {
+  position: relative;
 }
 
 .list {
-  grid-column: 4 / -1;
+  position: relative;
+  z-index: 1;
   border-top: 1px solid var(--line);
-}
-
-.row {
-  display: block;
 }
 
 .link {
@@ -38,13 +47,38 @@
   justify-content: space-between;
   align-items: baseline;
   gap: 24px;
-  padding-block: 18px;
+  padding-block: 16px;
   border-bottom: 1px solid var(--line);
-  transition: color 200ms ease;
+}
+
+.name {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .title {
-  font-size: clamp(1.15rem, 1.6vw, 1.5rem);
+  font-size: 1.6rem;
+  line-height: 1.2;
+}
+
+/* Segunda línea: tipo de pieza y cliente. */
+.detail {
+  color: var(--secondary);
+}
+
+/* La fila activa sobresale: sube 5 px con sus bordes, por encima de las vecinas,
+   con el texto más grueso y los bordes más marcados. */
+.list li[data-current] {
+  position: relative;
+  z-index: 1;
+  transform: translateY(-5px);
+  font-weight: 400;
+}
+
+.list li[data-current] .link {
+  border-color: #fff;
+  border-top: 1px solid #fff;
 }
 
 .meta {
@@ -52,83 +86,59 @@
   text-align: right;
 }
 
-/* Miniatura fija a la derecha: solo en táctil. */
-.thumb {
-  display: none;
-}
-
-/* Vista previa que sigue al cursor. Se posiciona con GSAP (x, y = cursor) y el
-   translate(-50%, -50%) la centra en él. */
-.preview {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 5;
-  width: min(28vw, 42vh * 4 / 3);
-  aspect-ratio: 4 / 3;
-  margin: calc(min(28vw, 42vh * 4 / 3) * -3 / 8) 0 0 calc(min(28vw, 42vh * 4 / 3) / -2);
-  pointer-events: none;
-  visibility: hidden;
-  opacity: 0;
-}
-
-.previewItem {
+/* Fondo de la tabla: cubre la columna de las listas a lo largo de todas las filas. */
+.background {
   position: absolute;
   inset: 0;
+  z-index: 0;
+  pointer-events: none;
   visibility: hidden;
-  opacity: 0;
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .list:hover .link {
-    color: var(--secondary);
-  }
-
-  .list .link:hover {
-    color: var(--text);
-  }
+.board[data-active] .background {
+  visibility: visible;
+  opacity: 0.6;
 }
 
-@media (hover: none), (pointer: coarse) {
-  .preview {
-    display: none;
-  }
+.backgroundItem {
+  position: absolute;
+  inset: 0;
+}
 
-  .link {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    grid-template-areas:
-      "title thumb"
-      "meta thumb";
-    align-items: start;
-    row-gap: 4px;
-  }
+/* Con fondo activo, el texto de la tabla pasa a blanco. */
+.board[data-active] .list,
+.board[data-active] .meta,
+.board[data-active] .detail {
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7), 0 0 14px rgba(0, 0, 0, 0.5);
+}
 
-  .title {
-    grid-area: title;
-  }
+/* La fila activa se distingue por tamaño. */
+.list li[data-current] .title {
+  font-size: 2rem;
+}
 
-  .meta {
-    grid-area: meta;
-    text-align: left;
-  }
+.list li[data-current] .meta {
+  font-size: 1rem;
+}
 
-  .thumb {
-    display: block;
-    grid-area: thumb;
-    width: 30vw;
-    max-width: 180px;
-    aspect-ratio: 4 / 3;
-  }
+.board[data-active] .list,
+.board[data-active] .link {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.board[data-active] .link:hover {
+  color: #fff;
 }
 
 @media (max-width: 768px) {
-  .group {
-    display: block;
+  .link {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
   }
 
-  .category {
-    padding-top: 0;
-    margin-bottom: 12px;
+  .meta {
+    text-align: left;
   }
 }

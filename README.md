@@ -1,7 +1,6 @@
 # RAMPA
 
-Portafolio de Estefany Velázquez (RAMPA). Next.js (App Router), GSAP + ScrollTrigger, Lenis,
-CSS Modules y next-intl (español por defecto en `/es`, inglés en `/en`). Sin CMS: el contenido
+Portafolio de Estefany Velázquez (RAMPA). Next.js (App Router), CSS Modules y next-intl (español por defecto en `/es`, inglés en `/en`). Sin CMS: el contenido
 vive en archivos del repositorio. Se publica en Vercel.
 
 ## Desarrollo
@@ -100,14 +99,12 @@ acercarse a la pantalla.
 | Contacto y datos generales | `src/data/site.ts` |
 | Textos de la interfaz y bio (es/en) | `messages/es.json`, `messages/en.json` |
 | Rutas traducidas (`/trabajos` ↔ `/works`) | `src/i18n/routing.ts` |
-| Shader del hero | `src/components/LineField.tsx` (referencia: `reference/hero-shader.html`) |
-| Secuencia de proyectos del inicio | `src/components/ProjectSequence.tsx` |
+| Inicio (lista de proyectos) | `src/app/[locale]/page.tsx` |
 | Índice con vista previa al pasar el cursor | `src/components/WorksIndex.tsx` |
 | Formulario y envío | `src/components/ContactForm.tsx`, `src/app/api/contact/route.ts` |
-| Scroll suave (Lenis) y transición entre páginas | `src/components/AppShell.tsx` |
+| Encabezado y pie | `src/components/Header.tsx`, `src/components/Footer.tsx` |
 | Imágenes y video | `src/components/Media.tsx`, `scripts/optimize-images.mjs` |
 | Colores, tipografía y márgenes | `src/app/globals.css` |
 
-Con la opción del sistema «reducir movimiento» activada, el sitio se muestra estático: el shader
-dibuja un solo cuadro, no hay Lenis ni animaciones de scroll ni fundidos, y el video no se
-reproduce solo.
+El sitio no tiene animaciones. `reference/hero-effect/` guarda un efecto WebGL (hilos
+iridiscentes y RAMPA de vidrio) que se desarrolló y no se usa; está fuera del build y del lint.

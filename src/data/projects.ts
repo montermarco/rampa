@@ -134,12 +134,11 @@ export const projects: Project[] = [
     },
     ratio: "3:4",
     cover: image("nike/03"),
-    hero: image("nike/02"),
+    hero: image("nike/05"),
     media: [
       video("nike/01"),
       image("nike/03"),
       image("nike/04"),
-      image("nike/05"),
       image("nike/06"),
       image("nike/08"),
       image("nike/07"),

@@ -1,17 +1,15 @@
 :root {
-  --background: #f4f4f2;
-  --text: #333333;
-  /* El brief pide #777777, pero sobre #f4f4f2 da 4.06:1; #6e6e6e alcanza AA (4.6:1). */
-  --secondary: #6e6e6e;
-  --line: #dcdcda;
-  --margin: 40px;
-  --header-height: 72px;
+  --background: #ffffff;
+  --text: #111111;
+  --secondary: #767676;
+  --line: #e6e6e6;
+  /* Columna central de ~72 % del ancho; la navbar vive en el margen izquierdo. */
+  --margin: max(20px, 9vw);
 }
 
 @media (max-width: 768px) {
   :root {
     --margin: 20px;
-    --header-height: 60px;
   }
 }
 
@@ -25,28 +23,28 @@ html {
   /* 14px sobre la base de 16px, respetando el tamaño que elija el usuario. */
   font-size: 87.5%;
   -webkit-text-size-adjust: 100%;
-  background: var(--background);
 }
 
 body {
   margin: 0;
-  /* Sin fondo propio: en el inicio el shader (canvas fijo con z-index -1) pinta detrás. */
-  background: transparent;
+  background: var(--background);
   color: var(--text);
-  font-family: var(--font-sans), "Helvetica Neue", Arial, sans-serif;
-  font-weight: 300;
+  /* Helvetica Neue Thin del sistema; donde no exista, la sans del sistema en fino. */
+  font-family: "Helvetica Neue", "HelveticaNeue-Thin", Helvetica, Arial, sans-serif;
+  font-weight: 200;
   font-size: 1rem;
   line-height: 1.5;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.02em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* La mono se usa para navegación, etiquetas y títulos de proyecto. */
-.mono {
-  font-family: var(--font-mono), "SF Mono", Menlo, monospace;
-  font-weight: 300;
-  letter-spacing: 0.02em;
+/* Etiquetas, navegación y pies: mayúsculas pequeñas con tracking. */
+.mono,
+.label {
+  font-size: 0.86rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 h1,
@@ -70,6 +68,10 @@ ul {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+a:hover {
+  color: var(--secondary);
 }
 
 img,
@@ -119,8 +121,14 @@ textarea {
   white-space: nowrap;
 }
 
-main {
-  flex: 1;
+/* Contenedor de la página (no `body > div`: Next inserta otros divs en body). */
+.site {
+  position: relative; /* referencia para la navbar del margen izquierdo */
   display: flex;
   flex-direction: column;
+  min-height: 100svh;
+}
+
+main {
+  flex: 1;
 }

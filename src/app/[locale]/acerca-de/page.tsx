@@ -33,29 +33,39 @@ export default async function AcercaDe({ params }: PageProps<"/[locale]/acerca-d
 
   return (
     <div className={styles.page}>
-      <h1 className={`${styles.heading} mono`}>{t("title")}</h1>
+      <h1 className={styles.heading}>{t("title")}</h1>
 
       <div className={styles.text}>
         <p className={styles.bio}>{t("bio")}</p>
 
-        <section className={styles.contact} aria-labelledby="contacto">
-          <h2 id="contacto" className="mono">
-            {t("contact")}
-          </h2>
-          <ul className="mono">
-            <li>
-              <a href={`mailto:${site.email}`}>{site.email}</a>
-            </li>
-            <li>
-              <a href={site.phoneHref}>{site.phone}</a>
-            </li>
-            <li>{t("city")}</li>
-            <li>
-              <a href={site.instagram} target="_blank" rel="noopener noreferrer">
-                instagram.com/rampa.mx
-              </a>
-            </li>
-          </ul>
+        {/* Contacto como ficha: etiqueta gris a la izquierda, dato a la derecha. */}
+        <section id="contacto" className={styles.contact} aria-label={t("contact")}>
+          <dl className={`${styles.facts} mono`}>
+            <div>
+              <dt>{t("email")}</dt>
+              <dd>
+                <a href={`mailto:${site.email}`}>{site.email}</a>
+              </dd>
+            </div>
+            <div>
+              <dt>{t("phone")}</dt>
+              <dd>
+                <a href={site.phoneHref}>{site.phone}</a>
+              </dd>
+            </div>
+            <div>
+              <dt>{t("cityLabel")}</dt>
+              <dd>{t("city")}</dd>
+            </div>
+            <div>
+              <dt>{t("instagram")}</dt>
+              <dd>
+                <a href={site.instagram} target="_blank" rel="noopener noreferrer">
+                  instagram.com/rampa.mx
+                </a>
+              </dd>
+            </div>
+          </dl>
         </section>
 
         {formEnabled && <ContactForm />}

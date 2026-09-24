@@ -6,7 +6,9 @@
     "email": "Correo",
     "language": "Idioma",
     "skip": "Saltar al contenido",
-    "main": "Principal"
+    "main": "Principal",
+    "contact": "Contacto",
+    "back": "Volver"
   },
   "home": {
     "statement": "Instalaciones digitales, performances visuales y visuales generativos en tiempo real.",
@@ -35,6 +37,10 @@
     "bio": "Estefany Velázquez, también conocida como Rampa, es una artista digital mexicana enfocada en la creación de instalaciones digitales, performances visuales y visuales generativos en tiempo real. Su estilo visual explora mundos paramétricos creados con volumetrías sinuosas en constante transformación, desembocando en texturas orgánicas y gradientes metálicos que se funden en claroscuros digitales llenos de detalles.",
     "contact": "Contacto",
     "city": "Ciudad de México",
+    "email": "Correo",
+    "phone": "Teléfono",
+    "cityLabel": "Ciudad",
+    "instagram": "Instagram",
     "imageAlt": "Visual generativo de RAMPA"
   },
   "form": {

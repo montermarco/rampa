@@ -1,24 +1,30 @@
+/* Ficha técnica, tipo cédula de museo: todo a la izquierda, en la columna. */
 .header {
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: 24px;
-  align-items: end;
-  padding: calc(var(--header-height) + 14vh) var(--margin) 32px;
+  gap: 32px;
+  padding: 40px var(--margin) 0;
 }
 
 .title {
-  grid-column: 1 / span 6;
   font-size: clamp(1.6rem, 3.2vw, 3rem);
   line-height: 1.1;
 }
 
+/* Cédula: etiqueta gris a la izquierda, valor a la derecha, una línea por dato,
+   separadas por líneas finas. */
 .facts {
-  grid-column: 8 / -1;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px 24px;
+  max-width: 34rem;
+  border-top: 1px solid var(--line);
   font-size: 0.86rem;
   letter-spacing: 0.04em;
+}
+
+.facts > div {
+  display: grid;
+  grid-template-columns: 12em 1fr;
+  gap: 24px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
 }
 
 .facts dt {
@@ -28,21 +34,37 @@
 /* Imagen o video principal a ancho casi completo (respeta los márgenes). Las piezas
    verticales se recortan para que no superen el alto de la pantalla; completas
    aparecen en la galería. */
+/* Flecha de regreso al índice, encima de la foto. 48 + 24 + 24 = 96: la foto queda a
+   la misma altura que antes. */
+.back {
+  display: block;
+  width: max-content;
+  height: 24px;
+  margin: 48px var(--margin) 0;
+  font-size: 1.6rem;
+  line-height: 24px;
+}
+
+.back:hover {
+  color: var(--secondary);
+}
+
+/* La foto principal va primero; todos los textos, debajo. */
 .hero {
   width: auto;
-  margin-inline: var(--margin);
+  margin: 24px var(--margin) 0;
   aspect-ratio: 16 / 9;
   max-height: 86vh;
   max-height: 86svh;
 }
 
-/* Descripción en columna angosta. */
+/* Descripción: columna de lectura alineada con la ficha. */
 .description {
   display: grid;
   gap: 1em;
-  max-width: 46ch;
-  margin-left: calc(var(--margin) + (100% - 2 * var(--margin)) * 0.25);
-  padding: 64px var(--margin) 0 0;
+  max-width: 34rem;
+  margin-inline: var(--margin);
+  padding-top: 32px;
   font-size: 1.15rem;
   line-height: 1.5;
 }
@@ -94,7 +116,9 @@
 }
 
 .nextTitle {
-  font-size: clamp(1.15rem, 1.6vw, 1.5rem);
+  font-size: 1.4rem;
+  letter-spacing: 0.02em;
+  text-transform: none;
   transition: color 200ms ease;
 }
 
@@ -104,11 +128,7 @@
 
 @media (max-width: 768px) {
   .header {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
     gap: 24px;
-    padding-top: calc(var(--header-height) + 10vh);
   }
 
   .hero {
@@ -116,9 +136,13 @@
   }
 
   .description {
-    margin-left: 0;
-    padding: 40px var(--margin) 0;
+    padding-top: 28px;
     font-size: 1.05rem;
+  }
+
+  .facts > div {
+    grid-template-columns: 1fr;
+    gap: 2px;
   }
 
   .gallery {

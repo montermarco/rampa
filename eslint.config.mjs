@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Copia congelada del efecto del hero, sin sus dependencias.
+    "reference/**",
   ]),
 ]);
 

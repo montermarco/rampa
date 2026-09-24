@@ -1,140 +1,101 @@
 "use client";
 
-import { useRef } from "react";
-import type { ReactNode } from "react";
-import { gsap, NO_REDUCED_MOTION, useGSAP } from "@/lib/gsap";
+import { useEffect, useRef, useState } from "react";
+import type { MouseEvent, PointerEvent as ReactPointerEvent, ReactNode } from "react";
 import TransitionLink from "./TransitionLink";
 import styles from "./WorksIndex.module.css";
 
-type Row = { slug: string; title: string; year: string; place: string; thumb: ReactNode };
-type Group = { id: string; label: string; projects: Row[] };
+type Row = {
+  slug: string;
+  title: string;
+  categories: string;
+  type: string;
+  client: string;
+  year: string;
+  place: string;
+  thumb: ReactNode;
+};
 
 /**
- * Índice de trabajos por categoría. Con cursor, al pasar sobre una fila su imagen
- * aparece centrada en el cursor, lo sigue con retraso y se abre desde el costado
- * (escala 0 → 1 y opacidad), como en el inicio. En táctil, la miniatura queda
- * estática a la derecha de cada fila.
+ * Índice de trabajos: una fila por proyecto, con sus categorías. Al pasar el cursor
+ * por una fila (o tocarla en móvil), la imagen de ese proyecto se vuelve el fondo de
+ * todo el contenedor de la tabla y el texto pasa a blanco. En móvil, un segundo toque
+ * sobre la misma fila abre el proyecto.
  */
-export default function WorksIndex({ title, groups }: { title: string; groups: Group[] }) {
-  const root = useRef<HTMLDivElement>(null);
-  const preview = useRef<HTMLDivElement>(null);
+export default function WorksIndex({ title, back, rows }: { title: string; back: string; rows: Row[] }) {
+  const [active, setActive] = useState<string | null>(null);
+  const [touch, setTouch] = useState(false);
+  const background = useRef<HTMLDivElement>(null);
 
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia();
+  // El fondo se quita en cuanto el cursor sale del rectángulo de la tabla (el bloque
+  // del fondo) por cualquier lado; dentro, incluidos los huecos entre listas, se queda.
+  const onMove = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (touch || !active || !background.current) return;
+    const r = background.current.getBoundingClientRect();
+    const { clientX: x, clientY: y } = event;
+    if (x < r.left || x > r.right || y < r.top || y > r.bottom) setActive(null);
+  };
 
-      mm.add(`${NO_REDUCED_MOTION} and (hover: hover) and (pointer: fine)`, () => {
-        const box = preview.current!;
-        const images = gsap.utils.toArray<HTMLElement>(`.${styles.previewItem}`, box);
-        // quickTo interpola hacia la última posición del cursor: el retraso suave.
-        const moveX = gsap.quickTo(box, "x", { duration: 0.6, ease: "power3" });
-        const moveY = gsap.quickTo(box, "y", { duration: 0.6, ease: "power3" });
-        let current: HTMLElement | null = null;
-        let tween: gsap.core.Tween | null = null;
+  useEffect(() => {
+    setTouch(window.matchMedia("(hover: none)").matches);
+  }, []);
 
-        const show = (slug: string, side: number) => {
-          const next = images.find((el) => el.dataset.slug === slug) ?? null;
-          if (next === current) return;
-          current = next;
-          images.forEach((el) => gsap.set(el, { autoAlpha: el === next ? 1 : 0 }));
-          tween?.kill();
-          tween = gsap.fromTo(
-            box,
-            { scale: 0, autoAlpha: 0, transformOrigin: side < 0 ? "left center" : "right center" },
-            { scale: 1, autoAlpha: 1, duration: 0.5, ease: "power2.out", overwrite: true },
-          );
-        };
-        const hide = () => {
-          current = null;
-          tween?.kill();
-          tween = gsap.to(box, { scale: 0.96, autoAlpha: 0, duration: 0.25, ease: "power2.out", overwrite: true });
-        };
-
-        const onMove = (event: PointerEvent) => {
-          moveX(event.clientX);
-          moveY(event.clientY);
-        };
-        // Las imágenes de la vista previa están ocultas, así que la carga diferida no
-        // las pediría: se descargan todas al primer hover sobre el índice.
-        let loaded = false;
-        const onEnter = (event: PointerEvent) => {
-          if (!loaded) {
-            loaded = true;
-            gsap.utils.toArray<HTMLImageElement>("img", box).forEach((img) => (img.loading = "eager"));
-          }
-          const row = event.currentTarget as HTMLElement;
-          // La imagen abre desde el costado en el que está el cursor.
-          const side = event.clientX < window.innerWidth / 2 ? -1 : 1;
-          // Primer hover: la caja salta al cursor sin interpolar desde la esquina.
-          if (!current) gsap.set(box, { x: event.clientX, y: event.clientY });
-          show(row.dataset.slug!, side);
-        };
-
-        const list = root.current!;
-        const rows = gsap.utils.toArray<HTMLElement>(`.${styles.row}`, list);
-        list.addEventListener("pointermove", onMove);
-        list.addEventListener("pointerleave", hide);
-        rows.forEach((row) => {
-          row.addEventListener("pointerenter", onEnter);
-          row.addEventListener("pointerleave", hide);
-        });
-        return () => {
-          list.removeEventListener("pointermove", onMove);
-          list.removeEventListener("pointerleave", hide);
-          rows.forEach((row) => {
-            row.removeEventListener("pointerenter", onEnter);
-            row.removeEventListener("pointerleave", hide);
-          });
-        };
-      });
-    },
-    { scope: root },
-  );
-
-  const rows = groups.flatMap((g) => g.projects);
-  // Un proyecto puede estar en dos categorías; la vista previa solo necesita una copia.
-  const unique = rows.filter((row, i) => rows.findIndex((r) => r.slug === row.slug) === i);
+  // Móvil: el primer toque pone el fondo; el segundo, sobre la misma fila, navega.
+  const onClick = (slug: string) => (event: MouseEvent<HTMLAnchorElement>) => {
+    if (touch && active !== slug) {
+      event.preventDefault();
+      setActive(slug);
+    }
+  };
 
   return (
-    <div ref={root} className={styles.page}>
-      <h1 className={`${styles.heading} mono`}>{title}</h1>
+    <div className={styles.page}>
+      <TransitionLink href="/" className={styles.back} aria-label={back}>
+        ←
+      </TransitionLink>
+      <h1 className={styles.heading}>{title}</h1>
 
-      {groups.map((group) => (
-        <section key={group.id} className={styles.group} aria-labelledby={`cat-${group.id}`}>
-          <h2 id={`cat-${group.id}`} className={`${styles.category} mono`}>
-            {group.label}
-          </h2>
-          <ul className={styles.list}>
-            {group.projects.map((project) => (
-              <li key={project.slug} className={styles.row} data-slug={project.slug}>
-                <TransitionLink
-                  href={{ pathname: "/trabajos/[slug]", params: { slug: project.slug } }}
-                  className={styles.link}
-                >
-                  <span className={`${styles.title} mono`}>{project.title}</span>
-                  <span className={styles.meta}>
-                    {project.year}
-                    {project.year && project.place && " — "}
-                    {project.place}
-                  </span>
-                  <span className={styles.thumb} aria-hidden="true">
-                    {project.thumb}
-                  </span>
-                </TransitionLink>
-              </li>
-            ))}
-          </ul>
-        </section>
-      ))}
+      <div
+        className={styles.board}
+        data-active={active ? "" : undefined}
+        onPointerLeave={() => !touch && setActive(null)}
+        onPointerMove={onMove}
+      >
+        <ul className={styles.list}>
+          {rows.map((project) => (
+            <li
+              key={project.slug}
+              data-current={active === project.slug ? "" : undefined}
+              onPointerEnter={() => !touch && setActive(project.slug)}
+            >
+              <TransitionLink
+                href={{ pathname: "/trabajos/[slug]", params: { slug: project.slug } }}
+                className={styles.link}
+                onClick={onClick(project.slug)}
+              >
+                <span className={styles.name}>
+                  <span className={styles.title}>{project.title}</span>
+                  {/* Datos del proyecto, uno por línea. */}
+                  {[project.categories, project.type, project.client, project.year].filter(Boolean).map((line) => (
+                    <span key={line} className={styles.detail}>
+                      {line}
+                    </span>
+                  ))}
+                </span>
+                <span className={`${styles.meta} label`}>{project.place}</span>
+              </TransitionLink>
+            </li>
+          ))}
+        </ul>
 
-      {/* Vista previa flotante (solo con cursor). Las imágenes están apiladas y se
-          muestra la del proyecto activo. */}
-      <div ref={preview} className={styles.preview} aria-hidden="true">
-        {unique.map((project) => (
-          <div key={project.slug} className={styles.previewItem} data-slug={project.slug}>
-            {project.thumb}
-          </div>
-        ))}
+        {/* Fondo: la imagen del proyecto activo cubre la columna de la tabla. */}
+        <div ref={background} className={styles.background} aria-hidden="true">
+          {rows.map((project) => (
+            <div key={project.slug} className={styles.backgroundItem} hidden={project.slug !== active}>
+              {project.thumb}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -1,0 +1,87 @@
+.sequence {
+  position: relative;
+}
+
+/* Escritorio (con animación): el contenedor mide una pantalla y las piezas se apilan. */
+.sequence[data-pinned] {
+  height: 100vh;
+  height: 100svh;
+}
+
+.sequence[data-pinned] .section {
+  position: absolute;
+  inset: 0;
+}
+
+.section {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  height: 100svh;
+  padding: var(--header-height) var(--margin) 0;
+}
+
+/* Las piezas alternan de lado: pares a la izquierda, impares a la derecha. */
+.section:nth-child(odd) {
+  justify-content: flex-start;
+}
+
+.section:nth-child(even) {
+  justify-content: flex-end;
+}
+
+.piece {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  /* Grande: hasta el 78 % del ancho o el 80 % de la altura; la proporción viene
+     del dato del proyecto (--ratio = ancho / alto). */
+  width: min(78vw, 80vh * var(--ratio));
+  width: min(78vw, 80svh * var(--ratio));
+}
+
+/* El marco define el rectángulo y el enlace; la imagen la dibuja el shader
+   (LineField) a partir de la <img> que hay dentro. Con reducción de movimiento el
+   shader no la dibuja y el marco se ve tal cual. */
+.frame {
+  aspect-ratio: var(--ratio);
+  overflow: hidden;
+}
+
+.inner {
+  width: 100%;
+  height: 100%;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  font-size: 0.86rem;
+  letter-spacing: 0.06em;
+}
+
+.meta {
+  color: var(--secondary);
+  text-align: right;
+}
+
+@media (max-width: 768px) {
+  .section {
+    justify-content: center;
+  }
+
+  .piece {
+    width: min(100%, 70vh * var(--ratio));
+    width: min(100%, 70svh * var(--ratio));
+  }
+
+  .info {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .meta {
+    text-align: left;
+  }
+}
